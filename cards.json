@@ -1,0 +1,257 @@
+[
+    {
+        "name": "Canisi Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_canisi_normal.png"
+    },
+    {
+        "name": "Condos Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_condos_normal.png"
+    },
+    {
+        "name": "Daiymon Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_daiymon_normal.png"
+    },
+    {
+        "name": "Grego2610 Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_grego2610_normal.png"
+    },
+    {
+        "name": "Harsuelon Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_harsuelon_normal.png"
+    },
+    {
+        "name": "iBalix Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_ibalix_normal.png"
+    },
+    {
+        "name": "Mattdassaud Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mattdassaud_normal.png"
+    },
+    {
+        "name": "MisterSand Normale",
+        "rarity": "Légendaire Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mistersand_normal.png"
+    },
+    {
+        "name": "SquazeFr Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_squazefr_normal.png"
+    },
+    {
+        "name": "BlackManon2A Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_blackmanon2a_normal.png"
+    },
+    {
+        "name": "chafomo Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_chafomo_normal.png"
+    },
+    {
+        "name": "funex Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_funex_normal.png"
+    },
+    {
+        "name": "KrySamS Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_krysams_normal.png"
+    },
+    {
+        "name": "Lait_Frais Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_lait_frais_normal.png"
+    },
+    {
+        "name": "Mineban34 Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mineban34_normal.png"
+    },
+    {
+        "name": "Sh3yss Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_sh3yss_normal.png"
+    },
+    {
+        "name": "Duracelle Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_duracelle_normal.png"
+    },
+    {
+        "name": "Sv4ro6 Normale",
+        "rarity": "Commun Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_sv4ro6_normal.png"
+    },
+    {
+        "name": "Tymothi Normale",
+        "rarity": "Epique Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_tymothi_normal.png"
+    },
+    {
+        "name": "Vianney Normale",
+        "rarity": "Commun Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_vianney_normal.png"
+    },
+    {
+        "name": "Woro Normale",
+        "rarity": "Rare Normale",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_woro_normal.png"
+    },
+    {
+        "name": "Canisi Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_canisi_golden.png"
+    },
+    {
+        "name": "Condos Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_condos_golden.png"
+    },
+    {
+        "name": "Daiymon Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_daiymon_golden.png"
+    },
+    {
+        "name": "Grego2610 Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_grego2610_golden.png"
+    },
+    {
+        "name": "Harsuelon Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_harsuelon_golden.png"
+    },
+    {
+        "name": "iBalix Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_ibalix_golden.png"
+    },
+    {
+        "name": "Mattdassaud Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mattdassaud_golden.png"
+    },
+    {
+        "name": "MisterSand Golden",
+        "rarity": "Légendaire Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mistersand_golden.png"
+    },
+    {
+        "name": "SquazeFr Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_squazefr_golden.png"
+    },
+    {
+        "name": "BlackManon2A Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_blackmanon2a_golden.png"
+    },
+    {
+        "name": "chafomo Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_chafomo_golden.png"
+    },
+    {
+        "name": "Duracelle Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_duracelle_golden.png"
+    },
+    {
+        "name": "funex Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_funex_golden.png"
+    },
+    {
+        "name": "KrySamS Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_krysams_golden.png"
+    },
+    {
+        "name": "Lait_Frais Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_lait_frais_golden.png"
+    },
+    {
+        "name": "Mineban34 Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mineban34_golden.png"
+    },
+    {
+        "name": "Sh3yss Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_sh3yss_golden.png"
+    },
+    {
+        "name": "Sv4ro6 Golden",
+        "rarity": "Commun Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_sv4ro6_golden.png"
+    },
+    {
+        "name": "Tymothi Golden",
+        "rarity": "Epique Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_tymothi_golden.png"
+    },
+    {
+        "name": "Vianney Golden",
+        "rarity": "Commun Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_vianney_golden.png"
+    },
+    {
+        "name": "Woro Golden",
+        "rarity": "Rare Gold",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_woro_golden.png"
+    },
+    {
+        "name": "SquazeFr Glitch",
+        "rarity": "Rare Glitch",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_squazefr_glitch.png"
+    },
+    {
+        "name": "iBalix Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_ibalix_holo.png"
+    },
+    {
+        "name": "MisterSand Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mistersand_holo.png"
+    },
+    {
+        "name": "Daiymon Glitch",
+        "rarity": "Rare Glitch",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_daiymon_glitch.png"
+    },
+    {
+        "name": "Condos Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_condos_holo.png"
+    },
+    {
+        "name": "Canisi Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_canisi_holo.png"
+    },
+    {
+        "name": "Grego2610 Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_grego2610_holo.png"
+    },
+    {
+        "name": "Mattdassaud Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_mattdassaud_holo.png"
+    },
+    {
+        "name": "Harsuelon Holographique",
+        "rarity": "Légendaire Holographique",
+        "image": "https://hebergementimgbot.netlify.app/img/staff_harsuelon_holo.png"
+    }
+]

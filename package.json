@@ -1,0 +1,14 @@
+{
+  "name": "pink-collect-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord pour la collection de cartes.",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.21.1"
+  }
+}
