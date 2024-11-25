@@ -1,21 +1,14 @@
 {
     "483551982104346625": {
         "collection": [
-            "Duracelle Normal",
-            "Sh3yss Normal",
-            "MisterSand Holographique",
-            "Grego2610 Holographique",
-            "Daiymon Normale",
-            "Daiymon Normale",
-            "Canisi Normale",
-            "Sv4ro6 Normale",
-            "Sv4ro6 Normale",
-            "Daiymon Golden"
+   
         ],
-        "cooldown": 1732228175115
+        "cooldown": 1732551188096
     },
     "310317481111584778": {
-        "collection": [],
-        "cooldown": 0
+        "collection": [
+            
+        ],
+        "cooldown": 1732319711187
     }
 }

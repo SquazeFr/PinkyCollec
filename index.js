@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { Client, REST, Routes, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { Client, REST, Routes, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,7 +20,10 @@ const port = 3000;
 // Sert les images à partir du dossier 'assets'
 app.use('/images', express.static(path.join(__dirname, 'assets')));
 
-// Lance le serveur Express
+// Lance le serveur Express (Keep-Alive)
+app.get('/', (req, res) => {
+    res.send('Le bot est en ligne !');
+});
 app.listen(port, () => {
     console.log(`Serveur lancé sur http://localhost:${port}`);
 });
@@ -55,25 +58,42 @@ const playerData = loadData();
 const rarityProbabilities = {
     Commun: {
         "Commun Normale": 35,
-        "Commun Gold": 12.5,
-        "Commun Holographique": 2.5,
+        "Commun ✨ ": 12.5,
+        "Commun 🌈 ": 2.5,
     },
     Rare: {
         "Rare Normale": 24.5,
-        "Rare Gold": 8.75,
-        "Rare Holographique": 1.5,
+        "Rare ✨ ": 8.75,
+        "Rare 🌈 ": 1.5,
         "Rare Glitch": 0.25,
     },
     Epique: {
         "Epique Normale": 7,
-        "Epique Gold": 2.5,
-        "Epique Holographique": 0.5,
+        "Epique ✨ ": 2.5,
+        "Epique 🌈 ": 0.5,
     },
     Legendaire: {
         "Légendaire Normale": 3.5,
-        "Légendaire Gold": 1.25,
-        "Légendaire Holographique": 0.25,
+        "Légendaire ✨ ": 1.25,
+        "Légendaire 🌈 ": 0.25,
     },
+};
+
+// Couleurs par rareté
+const rarityColors = {
+    "Commun Normale": '#A0A0A0', // Gris
+    "Commun ✨ ": '#FFD700', // Or
+    "Commun 🌈": '#C0C0C0', // Argent
+    "Rare Normale": '#1E90FF', // Bleu
+    "Rare ✨ ": '#FFD700', // Or
+    "Rare 🌈": '#8A2BE2', // Violet
+    "Rare Glitch": '#FF1493', // Rose
+    "Epique Normale": '#FF4500', // Orange
+    "Epique ✨ ": '#FFD700', // Or
+    "Epique 🌈": '#8B008B', // Violet foncé
+    "Légendaire Normale": '#DAA520', // Doré
+    "Légendaire ✨ ": '#FFD700', // Or
+    "Légendaire 🌈": '#FF69B4', // Rose vif
 };
 
 // Fonction pour tirer une carte en fonction des probabilités
@@ -97,7 +117,7 @@ function drawCard() {
     return allCards[randomIndex];
 }
 
-// Fonction pour enregistrer les commandes
+// Fonction pour enregistrer les commandes globales
 async function registerCommands() {
     const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
@@ -141,12 +161,12 @@ async function registerCommands() {
     ];
 
     try {
-        console.log('Déploiement des commandes...');
+        console.log('Déploiement des commandes globales...');
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+            Routes.applicationCommands(process.env.CLIENT_ID),
             { body: commands }
         );
-        console.log('Commandes enregistrées avec succès !');
+        console.log('Commandes globales enregistrées avec succès !');
     } catch (error) {
         console.error('Erreur lors de l’enregistrement des commandes :', error);
     }
@@ -155,8 +175,23 @@ async function registerCommands() {
 // Lorsqu'il est prêt
 client.once('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag}`);
+    
     // Enregistrer les commandes au démarrage
     registerCommands();
+
+    // Mise en place du statut rotatif
+    const statuses = [
+        "Venez tenter votre chance !",
+        "Capturer les tous !",
+        "Made by SquazeFr & Daiymoon",
+    ];
+
+    let index = 0;
+    setInterval(() => {
+        const status = statuses[index];
+        client.user.setActivity(status, { type: "PLAYING" });
+        index = (index + 1) % statuses.length; // Boucle circulaire
+    }, 10000); // Change toutes les 10 secondes
 });
 
 // Gestion des interactions
@@ -196,7 +231,14 @@ client.on('interactionCreate', async interaction => {
             return await interaction.reply("Une erreur est survenue lors de l'ouverture du booster.");
         }
 
-        player.collection.push(cardDetails.name);
+        // Vérifiez si la carte est déjà dans la collection
+        const existingCard = player.collection.find(c => c.name === cardDetails.name);
+        if (existingCard) {
+            existingCard.count += 1; // Incrémente le compteur
+        } else {
+            player.collection.push({ name: cardDetails.name, count: 1 }); // Ajoute la carte avec un compteur de 1
+        }
+
         player.cooldown = now + 3 * 60 * 60 * 1000; // 3 heures de cooldown
         saveData(playerData);
 
@@ -204,11 +246,25 @@ client.on('interactionCreate', async interaction => {
             .setTitle(`🎉 Vous avez obtenu une nouvelle carte : ${cardDetails.name}`)
             .setDescription(`Rareté : ${drawnCard.type}`)
             .setImage(cardDetails.image)
-            .setColor('#FFD700');
+            .setColor(rarityColors[drawnCard.type]); // Utilisez la couleur basée sur la rareté
 
         await interaction.reply({ embeds: [embed] });
     } else if (commandName === 'pc-collec') {
-        // Gestion de la collection similaire à votre code existant
+        const player = playerData[userId];
+        if (!player.collection || player.collection.length === 0) {
+            return await interaction.reply("Votre collection est vide.");
+        }
+
+        const description = player.collection
+            .map(card => `${card.name} - ${card .count}`) // Affiche le nom et le nombre d'exemplaires
+            .join('\n');
+
+        const embed = new EmbedBuilder()
+            .setTitle('Votre collection de cartes')
+            .setDescription(description)
+            .setColor('#00FF00');
+
+        await interaction.reply({ embeds: [embed] });
     } else if (commandName === 'pc-list') {
         const embed = new EmbedBuilder()
             .setTitle('Liste des cartes disponibles')
@@ -228,7 +284,7 @@ client.on('interactionCreate', async interaction => {
             .setTitle(card.name)
             .setDescription(`Rareté : ${card.rarity}`)
             .setImage(card.image)
-            .setColor('#FFD700');
+            .setColor(rarityColors[card.rarity]); // Utilisez la couleur basée sur la rareté
 
         await interaction.reply({ embeds: [embed] });
     } else if (commandName === 'pco-reset-cooldown') {
@@ -243,15 +299,15 @@ client.on('interactionCreate', async interaction => {
         const userIdToReset = interaction.options.getString('id');
 
         if (!playerData[userIdToReset]) {
-            return await interaction.reply(`Aucun joueur trouvé avec l'ID : ${userIdToReset}`);
+            return await interaction.reply(`Aucune donnée trouvée pour l'utilisateur avec l'ID : ${userIdToReset}`);
         }
 
         playerData[userIdToReset].cooldown = 0;
         saveData(playerData);
 
-        await interaction.reply(`Le cooldown du joueur avec l'ID **${userIdToReset}** a été réinitialisé.`);
+        await interaction.reply(`Le cooldown du joueur avec l'ID : ${userIdToReset} a été réinitialisé.`);
     }
 });
 
-// Connexion du bot à Discord
+// Connexion du bot
 client.login(process.env.BOT_TOKEN);
