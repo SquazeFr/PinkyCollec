@@ -57,43 +57,43 @@ const playerData = loadData();
 // Probabilités pour les cartes
 const rarityProbabilities = {
     Commun: {
-        "Commun Normale": 35,
-        "Commun ✨ ": 12.5,
-        "Commun 🌈 ": 2.5,
+        "Commun": 35,
+        "Commun Gold": 12.5,
+        "Commun Holographique": 2.5,
     },
     Rare: {
-        "Rare Normale": 24.5,
-        "Rare ✨ ": 8.75,
-        "Rare 🌈 ": 1.5,
+        "Rare": 24.5,
+        "Rare Gold": 8.75,
+        "Rare Holographique": 1.5,
         "Rare Glitch": 0.25,
     },
     Epique: {
-        "Epique Normale": 7,
-        "Epique ✨ ": 2.5,
-        "Epique 🌈 ": 0.5,
+        "Epique": 7,
+        "Epique Gold": 2.5,
+        "Epique Holographique": 0.5,
     },
     Legendaire: {
-        "Légendaire Normale": 3.5,
-        "Légendaire ✨ ": 1.25,
-        "Légendaire 🌈 ": 0.25,
+        "Légendaire": 3.5,
+        "Légendaire Gold": 1.25,
+        "Légendaire Holographique": 0.25,
     },
 };
 
 // Couleurs par rareté
 const rarityColors = {
-    "Commun Normale": '#A0A0A0', // Gris
-    "Commun ✨ ": '#FFD700', // Or
-    "Commun 🌈": '#C0C0C0', // Argent
-    "Rare Normale": '#1E90FF', // Bleu
-    "Rare ✨ ": '#FFD700', // Or
-    "Rare 🌈": '#8A2BE2', // Violet
-    "Rare Glitch": '#FF1493', // Rose
-    "Epique Normale": '#FF4500', // Orange
-    "Epique ✨ ": '#FFD700', // Or
-    "Epique 🌈": '#8B008B', // Violet foncé
-    "Légendaire Normale": '#DAA520', // Doré
-    "Légendaire ✨ ": '#FFD700', // Or
-    "Légendaire 🌈": '#FF69B4', // Rose vif
+    "Commun": '#78B159',
+    "Commun Gold": '#78B159',
+    "Commun Holographique": '#78B159',
+    "Rare": '#55ACEE',
+    "Rare Gold": '#55ACEE',
+    "Rare Holographique": '#55ACEE',
+    "Rare Glitch": '#4A4A4A',
+    "Epique": '#AA8ED6',
+    "Epique Gold": '#AA8ED6',
+    "Epique Holographique": '#AA8ED6',
+    "Légendaire": '#FFD700',
+    "Légendaire Gold": '#FFD700',
+    "Légendaire Holographique": '#FFD700',
 };
 
 // Fonction pour tirer une carte en fonction des probabilités
@@ -106,7 +106,7 @@ function drawCard() {
         const subTypes = rarityProbabilities[rarity];
         Object.keys(subTypes).forEach(subType => {
             const weight = subTypes[subType];
-            for (let i = 0; i < weight * 10; i++) { // Multiplier par 10 pour éviter les erreurs de précision
+            for (let i = 0; i < weight * 10; i++) {
                 allCards.push({ rarity, type: subType });
             }
         });
@@ -128,7 +128,7 @@ async function registerCommands() {
         },
         {
             name: 'pc-collec',
-            description: 'Affiche votre collection de cartes.',
+            description: ' Affiche votre collection de cartes.',
         },
         {
             name: 'pc-list',
@@ -158,6 +158,42 @@ async function registerCommands() {
                 },
             ],
         },
+        {
+            name: 'pco-give',
+            description: 'Ajoute une carte à un utilisateur (Admin uniquement).',
+            options: [
+                {
+                    name: 'id',
+                    type: 3, // STRING
+                    description: 'ID Discord de l\'utilisateur',
+                    required: true,
+                },
+                {
+                    name: 'carte',
+                    type: 3, // STRING
+                    description: 'Nom de la carte à ajouter',
+                    required: true,
+                },
+            ],
+        },
+          {
+            name: 'pco-remove',
+            description: 'Retire une carte à un utilisateur (Admin uniquement).',
+            options: [
+                {
+                    name: 'id',
+                    type: 3, // STRING
+                    description: 'ID Discord de l\'utilisateur',
+                    required: true,
+                },
+                {
+                    name: 'carte',
+                    type: 3, // STRING
+                    description: 'Nom de la carte à retirer',
+                    required: true,
+                },
+            ],
+        },
     ];
 
     try {
@@ -178,7 +214,6 @@ client.once('ready', () => {
     
     // Enregistrer les commandes au démarrage
     registerCommands();
-
     // Mise en place du statut rotatif
     const statuses = [
         "Venez tenter votre chance !",
@@ -210,7 +245,7 @@ client.on('interactionCreate', async interaction => {
         saveData(playerData);
     }
 
-    if (commandName === 'pc-open') {
+    if (commandName === 'pc-open' ) {
         const now = Date.now();
         const player = playerData[userId];
 
@@ -218,6 +253,7 @@ client.on('interactionCreate', async interaction => {
         if (player.cooldown > now) {
             const timeLeft = Math.ceil((player.cooldown - now) / (60 * 60 * 1000));
             return await interaction.reply(`Vous devez attendre encore ${timeLeft} heure(s) avant d'ouvrir un booster.`);
+            
         }
 
         // Tirage de la carte
@@ -243,7 +279,7 @@ client.on('interactionCreate', async interaction => {
         saveData(playerData);
 
         const embed = new EmbedBuilder()
-            .setTitle(`🎉 Vous avez obtenu une nouvelle carte : ${cardDetails.name}`)
+            .setTitle(`Vous avez obtenu une nouvelle carte :\n${cardDetails.name}`)
             .setDescription(`Rareté : ${drawnCard.type}`)
             .setImage(cardDetails.image)
             .setColor(rarityColors[drawnCard.type]); // Utilisez la couleur basée sur la rareté
@@ -256,7 +292,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         const description = player.collection
-            .map(card => `${card.name} - ${card .count}`) // Affiche le nom et le nombre d'exemplaires
+            .map(card => `${card.name} - ${card.count}`) // Affiche le nom et le nombre d'exemplaires
             .join('\n');
 
         const embed = new EmbedBuilder()
@@ -264,7 +300,7 @@ client.on('interactionCreate', async interaction => {
             .setDescription(description)
             .setColor('#00FF00');
 
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed]});
     } else if (commandName === 'pc-list') {
         const embed = new EmbedBuilder()
             .setTitle('Liste des cartes disponibles')
@@ -286,7 +322,7 @@ client.on('interactionCreate', async interaction => {
             .setImage(card.image)
             .setColor(rarityColors[card.rarity]); // Utilisez la couleur basée sur la rareté
 
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed]});
     } else if (commandName === 'pco-reset-cooldown') {
         const staffRoleName = "Staff"; // Nom exact du rôle
         const memberRoles = interaction.member.roles.cache;
@@ -306,6 +342,86 @@ client.on('interactionCreate', async interaction => {
         saveData(playerData);
 
         await interaction.reply(`Le cooldown du joueur avec l'ID : ${userIdToReset} a été réinitialisé.`);
+    } else if (commandName === 'pco-give') {
+        const staffRoleName = "Staff"; // Nom exact du rôle
+        const memberRoles = interaction.member.roles.cache;
+
+        // Vérifiez si l'utilisateur possède le rôle "Staff"
+        if (!memberRoles.some(role => role.name === staffRoleName)) {
+            return await interaction.reply("Vous n'avez pas la permission d'utiliser cette commande. Ce rôle est réservé au personnel ayant le rôle 'Staff'.");
+        }
+
+        const userIdToGive = interaction.options.getString('id');
+        const cardNameToGive = interaction.options.getString('carte');
+
+        // Vérifiez si l'utilisateur a des données
+        if (!playerData[userIdToGive]) {
+            playerData[userIdToGive] = {
+                collection: [],
+                cooldown: 0,
+            };
+            saveData(playerData);
+        }
+
+        // Cherchez la carte dans le fichier cards.json
+        const cardToGive = cards.find(c => c.name.toLowerCase() === cardNameToGive.toLowerCase());
+
+        if (!cardToGive) {
+            return await interaction.reply(`Carte '${cardNameToGive}' introuvable.`);
+        }
+
+        // Vérifiez si la carte est déjà dans la collection
+        const existingCard = playerData[userIdToGive].collection.find(c => c.name === cardToGive.name);
+        if (existingCard) {
+            existingCard.count += 1; // Incrémente le compteur
+        } else {
+            playerData[userIdToGive].collection.push({ name: cardToGive.name, count: 1 }); // Ajoute la carte avec un compteur de 1
+        }
+
+        saveData(playerData);
+
+        await interaction.reply(`La carte '${cardToGive.name}' a été ajoutée à la collection de l'utilisateur avec l'ID : ${userIdToGive}.`);
+    }
+    else if (commandName === 'pco-remove' ) {
+        const staffRoleName = "Staff"; // Nom exact du rôle
+        const memberRoles = interaction.member.roles.cache;
+    
+        // Vérifiez si l'utilisateur possède le rôle "Staff"
+        if (!memberRoles.some(role => role.name === staffRoleName)) {
+            return await interaction.reply("Vous n'avez pas la permission d'utiliser cette commande. Ce rôle est réservé au personnel ayant le rôle 'Staff'.");
+        }
+    
+        const userIdToRemove = interaction.options.getString('id');
+        const cardNameToRemove = interaction.options.getString('carte');
+    
+        // Vérifiez si l'utilisateur a des données
+        if (!playerData[userIdToRemove]) {
+            return await interaction.reply(`Aucune donnée trouvée pour l'utilisateur avec l'ID : ${userIdToRemove}`);
+        }
+    
+        // Cherchez la carte dans le fichier cards.json
+        const cardToRemove = cards.find(c => c.name.toLowerCase() === cardNameToRemove.toLowerCase());
+    
+        if (!cardToRemove) {
+            return await interaction.reply(`Carte '${cardNameToRemove}' introuvable.`);
+        }
+    
+        // Vérifiez si la carte est déjà dans la collection
+        const existingCard = playerData[userIdToRemove].collection.find(c => c.name === cardToRemove.name);
+        if (existingCard) {
+            existingCard.count -= 1; // Décrémente le compteur
+            if (existingCard.count <= 0) {
+                // Si le compteur atteint zéro, retirez la carte de la collection
+                playerData[userIdToRemove].collection = playerData[userIdToRemove].collection.filter(c => c.name !== cardToRemove.name);
+                await interaction.reply(`La carte '${cardToRemove.name}' a été retirée de la collection de l'utilisateur avec l'ID : ${userIdToRemove}.`);
+            } else {
+                await interaction.reply(`Une carte '${cardToRemove.name}' a été retirée de la collection de l'utilisateur avec l'ID : ${userIdToRemove}. Il en reste ${existingCard.count}.`);
+            }
+        } else {
+            return await interaction.reply(`L'utilisateur n'a pas la carte '${cardToRemove.name}' dans sa collection.`);
+        }
+    
+        saveData(playerData);
     }
 });
 
